@@ -8,3 +8,5 @@
 .idea/uiDesigner.xml
 logs/
 saya.iml
+.idea/vcs.xml
+src/test/
