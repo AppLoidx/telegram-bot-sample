@@ -60,7 +60,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 public class LogHandler implements RequestLogger {
 
     private static final Logger log = LoggerFactory.getLogger(LogHandler.class);
-
     
     @Override
     public void execute(Message message) {
@@ -95,9 +94,27 @@ public class AfterLogHandler implements RequestLogger {
 }
 ```
 
-Here you need to implement executeAfter from RequestLogger. See DefaultBot sources to see implementation
+Here you need to implement executeAfter from RequestLogger. See DefaultBot sources to see implementation.
 
 There is execution timeline:
 ```
-----> [Logger (BEFORE)] ----> [Execute command and response to user] ----> [Logger(AFTER)]
+----> [Logger (BEFORE)] ----> [Execute command and response to user] ----> [Logger (AFTER)]
+```
+
+Also, you can use array of ExecutionTime:
+```java
+@Log(executionTime = {ExecutionTime.AFTER, ExecutionTime.BEFORE})
+public class AfterAndBeforeLogger implements RequestLogger {
+    private static final Logger log = LoggerFactory.getLogger(AfterAndBeforeLogger.class);
+
+    @Override
+    public void execute(Message message) {
+        log.info("Before execute");
+    }
+
+    @Override
+    public void executeAfter(Message message, SendMessage sendMessage) {
+        log.info("After execute");
+    }
+}
 ```
