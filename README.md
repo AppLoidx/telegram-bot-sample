@@ -9,6 +9,14 @@ BOT_TOKEN =   <bot token from telegram bot-father>
 BOT_NAME  =   <your bot name>
 ```
 
+## Run
+```
+mvn clean install
+java -jar target/saya-1.0-SNAPSHOT.jar
+```
+
+or just run it from IntellijIDEA
+
 ### Add command
 ```java
 import com.apploidxxx.handler.Log;
