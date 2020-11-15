@@ -10,5 +10,5 @@ import java.lang.annotation.RetentionPolicy;
 public @interface Log {
     String value() default ".*";
 
-    ExecutionTime executionTime() default ExecutionTime.BEFORE;
+    ExecutionTime[] executionTime() default ExecutionTime.BEFORE;
 }

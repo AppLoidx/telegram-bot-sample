@@ -54,15 +54,28 @@ public final class CommandService {
         final Set<RequestLogger> matchedLoggers = new HashSet<>();
         for (Map.Entry<String, Set<RequestLogger>> entry : loggersMap.entrySet()) {
             for (RequestLogger logger : entry.getValue()) {
-                if (logger.getClass().getAnnotation(Log.class).executionTime() == executionTime)
-                    if (message.matches(entry.getKey())) {
+
+                if (containsExecutionTime(extractExecutionTimes(logger), executionTime) ) {
+                    if (message.matches(entry.getKey()))
                         matchedLoggers.add(logger);
-                    }
+                }
             }
 
         }
 
         return matchedLoggers;
+    }
+
+    private static ExecutionTime[] extractExecutionTimes(RequestLogger logger) {
+        return logger.getClass().getAnnotation(Log.class).executionTime();
+    }
+
+    private static boolean containsExecutionTime(ExecutionTime[] times, ExecutionTime executionTime) {
+        for (ExecutionTime et : times) {
+            if (et == executionTime) return true;
+        }
+
+        return false;
     }
 
 
