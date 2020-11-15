@@ -1,2 +1,10 @@
 # Project exclude paths
 /target/
+.idea/.gitignore
+.idea/compiler.xml
+.idea/dictionaries/
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/uiDesigner.xml
+logs/
+saya.iml
